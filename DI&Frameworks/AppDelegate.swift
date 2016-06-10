@@ -14,11 +14,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        DependenciesContainer.registerDependencies()
+        let dependenciesContainer = DependenciesContainer()
+        dependenciesContainer.registerDependencies()
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
-        let searchViewController = DependenciesContainer.resolve(SearchViewController)
+        let searchViewController = dependenciesContainer.resolve(SearchViewController)
         let navigationController = UINavigationController(rootViewController: searchViewController)
         window?.rootViewController = navigationController
 

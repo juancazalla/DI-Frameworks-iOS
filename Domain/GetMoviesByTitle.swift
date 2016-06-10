@@ -19,9 +19,9 @@ public protocol GetMoviesByTitleType {
 
 public class GetMoviesByTitle: GetMoviesByTitleType {
 
-    let moviesRepository: MoviesRepository
+    let moviesRepository: MoviesRepositoryType
 
-    public init(moviesRepository: MoviesRepository) {
+    public init(moviesRepository: MoviesRepositoryType) {
         self.moviesRepository = moviesRepository
     }
 

@@ -12,44 +12,51 @@ import Domain
 import Data
 
 struct DependenciesContainer {
-    private static let container = Container()
+    static let container = Container()
     
-    static func registerDependencies() {
-        container.register(GetMoviesByTitleType.self) { _ in
-            GetMoviesByTitle(moviesRepository: self.resolve(MoviesRepository))
+    func registerDependencies() {
+        DependenciesContainer.container.register(GetMoviesByTitleType.self) { _ in
+            GetMoviesByTitle(moviesRepository: self.resolve(MoviesRepositoryType))
         }
-        container.register(SearchViewModelType.self) { _ in
+        DependenciesContainer.container.register(SearchViewModelType.self) { _ in
             SearchViewModel(getMoviesByTitle: self.resolve(GetMoviesByTitleType))
         }
-        container.register(SearchViewController.self) { _ in
+        DependenciesContainer.container.register(SearchViewController.self) { _ in
             SearchViewController(viewModel: self.resolve(SearchViewModelType), wireframe: self.resolve(SearchMovieWireframeType))
         }
-        container.register(SearchMovieWireframeType.self) { _ in
+        DependenciesContainer.container.register(SearchMovieWireframeType.self) { _ in
             SearchMovieWireframe()
         }
-        container.register(MovieDetailsViewController.self) { _, viewModel in
+        DependenciesContainer.container.register(MovieDetailsViewController.self) { _, viewModel in
             MovieDetailsViewController(viewModel: viewModel)
         }
-        container.register(MovieDetailsViewModelType.self) { _, movie in
+        DependenciesContainer.container.register(MovieDetailsViewModelType.self) { _, movie in
             MovieDetailsViewModel(movie: movie)
         }
-        container.register(MoviesRepository.self) { _ in
+        DependenciesContainer.container.register(MoviesRepositoryType.self) { _ in
+            MoviesRepository(remoteDataSource: self.resolve(MoviesRemoteDataSourceType),
+                             cacheDataSource: self.resolve(MoviesCacheDataSourceType))
+        }
+        DependenciesContainer.container.register(MoviesRemoteDataSourceType.self) { _ in
             TMDBDataSource(network: self.resolve(Networking))
         }
-        container.register(Networking.self) { _ in
+        DependenciesContainer.container.register(MoviesCacheDataSourceType.self) { _ in
+            MoviesCacheDataSource()
+        }
+        DependenciesContainer.container.register(Networking.self) { _ in
             Network()
         }
     }
 
-    static func resolve<Service> (serviceType: Service.Type) -> Service {
-        guard let service = container.resolve(serviceType) else {
+    func resolve<Service> (serviceType: Service.Type) -> Service {
+        guard let service = DependenciesContainer.container.resolve(serviceType) else {
             fatalError("Can not resolve: \(String(Service))")
         }
         return service
     }
     
-    static func resolve<Service, Arg1>(serviceType: Service.Type, argument: Arg1) -> Service {
-        guard let service = container.resolve(serviceType, argument: argument) else {
+    func resolve<Service, Arg1>(serviceType: Service.Type, argument: Arg1) -> Service {
+        guard let service = DependenciesContainer.container.resolve(serviceType, argument: argument) else {
             fatalError("Can not resolve: \(String(Service))")
         }
         return service

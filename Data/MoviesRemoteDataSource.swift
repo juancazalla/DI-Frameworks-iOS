@@ -1,5 +1,5 @@
 //
-//  TheMovieDBMoviesDataSource.swift
+//  MoviesRemoteDataSource.swift
 //  DI&Frameworks
 //
 //  Created by Juan Cazalla Estrella on 17/5/16.
@@ -12,9 +12,13 @@ import BrightFutures
 import Alamofire
 import SwiftyJSON
 
-public struct TMDBDataSource: MoviesRepository {
+public protocol MoviesRemoteDataSourceType {
+    func getMoviesByTitle(title: String) -> Future<[Domain.Movie], GetMoviesError>
+}
 
-    let network: Networking
+public struct TMDBDataSource: MoviesRemoteDataSourceType {
+
+    private let network: Networking
 
     public init(network: Networking) {
         self.network = network
@@ -24,8 +28,7 @@ public struct TMDBDataSource: MoviesRepository {
         let moviesPromise = Promise<[Domain.Movie], GetMoviesError>()
 
         let url = "https://api.themoviedb.org/3/search/movie"
-        // let apiKey = "YOUR API KEY"
-        let parameters = ["api_key": apiKey, "query": title]
+        let parameters = ["api_key": Keys.TMDBApiKey, "query": title]
 
         network.request(.GET, url, parameters: parameters).response {
             _, _, data, error in
