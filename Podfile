@@ -22,7 +22,8 @@ target 'DI&Frameworks' do
   dataPods
   
   target 'DI&FrameworksTests' do
-
+    pod 'KIF', '~> 3.0', :configurations => ['Debug']
+    pod 'Nimble', '~> 4.0.0'
   end
 
   target 'DI&FrameworksUITests' do
