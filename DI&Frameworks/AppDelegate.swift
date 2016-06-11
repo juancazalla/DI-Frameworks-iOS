@@ -12,9 +12,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var dependenciesContainer: DependenciesContainer!
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let dependenciesContainer = DependenciesContainer()
+        self.dependenciesContainer = DependenciesContainer.sharedInstance
         dependenciesContainer.registerDependencies()
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)

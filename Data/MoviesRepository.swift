@@ -3,7 +3,7 @@
 //  DI&Frameworks
 //
 //  Created by Juan Cazalla Estrella on 27/5/16.
-//  Copyright (c) 2016 Juan Cazalla Estrella. All rights reserved.
+//  Copyright © 2016 Juan Cazalla Estrella. All rights reserved.
 //
 
 import Foundation

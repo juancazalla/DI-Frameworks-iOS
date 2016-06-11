@@ -30,6 +30,7 @@ class SearchViewController: UIViewController {
     init(viewModel: SearchViewModelType, wireframe: SearchMovieWireframeType) {
         searchBar = UISearchBar()
         searchBar.searchBarStyle = .Minimal
+        searchBar.accessibilityLabel = "SearchBar"
         self.viewModel = viewModel
         self.wireframe = wireframe
 

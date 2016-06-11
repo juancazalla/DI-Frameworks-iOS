@@ -17,7 +17,7 @@ struct SearchMovieWireframe: SearchMovieWireframeType {
     
     private let dependenciesContainer: DependenciesContainer
     
-    init(dependenciesContainer: DependenciesContainer = DependenciesContainer()) {
+    init(dependenciesContainer: DependenciesContainer = DependenciesContainer.sharedInstance) {
         self.dependenciesContainer = dependenciesContainer
     }
     
