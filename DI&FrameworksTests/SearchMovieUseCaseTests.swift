@@ -17,11 +17,9 @@ import Domain
 class SearchMovieUseCaseTests: XCTestCase {
 
     func testSearchMovies() {
-        let movies: [Domain.Movie] = [Movie(title: "Brácula (Condemor II)"),
-                                      Movie(title: "Aquí llega Condemor, el pecador de la pradera")]
-        givenAnEmptySearchViewController(futureSearchResults: movies)
+        givenAnEmptySearchViewController()
 
-        searchMoviesWithTitle("Condemor")
+        let movies = searchMoviesWithTitle("Condemor")
 
         for movie in movies {
             let movieCell = tester().waitForViewWithAccessibilityLabel(movie.title)
@@ -33,19 +31,22 @@ class SearchMovieUseCaseTests: XCTestCase {
 }
 
 private extension SearchMovieUseCaseTests {
-    func givenAnEmptySearchViewController(futureSearchResults movies: [Domain.Movie]) {
+    func givenAnEmptySearchViewController() {
         let dependenciesContainer = DependenciesContainer.sharedInstance
-        dependenciesContainer.container.register(MoviesRemoteDataSourceType.self) { _ in
-            MoviesRemoteDataSourceStub(movies: movies)
+        dependenciesContainer.container.register(Networking.self) { _ in
+            NetworkStub(filename: "Condemor")
         }
 
         let searchViewController = dependenciesContainer.resolve(SearchViewController)
         UIApplication.sharedApplication().keyWindow?.rootViewController = UINavigationController(rootViewController: searchViewController)
     }
     
-    func searchMoviesWithTitle(title: String) {
+    func searchMoviesWithTitle(title: String) -> [Domain.Movie] {
         tester().enterText(title, intoViewWithAccessibilityLabel: "SearchBar")
         
         tester().tapViewWithAccessibilityLabel("Search")
+        
+        return [Movie(title: "Brácula (Condemor II)"),
+                Movie(title: "Aquí llega Condemor, el pecador de la pradera")]
     }
 }

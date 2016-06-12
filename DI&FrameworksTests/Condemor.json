@@ -1,0 +1,45 @@
+{
+    "page": 1,
+    "results": [
+                {
+                "poster_path": "/8IUx0RiqXiYEGkz3QM5Ca2Gimvq.jpg",
+                "adult": false,
+                "overview": "",
+                "release_date": "1997-08-13",
+                "genre_ids": [
+                              27,
+                              35
+                              ],
+                "id": 166206,
+                "original_title": "Brácula (Condemor II)",
+                "original_language": "es",
+                "title": "Brácula (Condemor II)",
+                "backdrop_path": "/5setWMjrPLLUnHvgXoi7R1cUIDj.jpg",
+                "popularity": 1.000143,
+                "vote_count": 0,
+                "video": false,
+                "vote_average": 0
+                },
+                {
+                "poster_path": "/5iIuCFjvqX49tj6lM0WlmK2hHpL.jpg",
+                "adult": false,
+                "overview": "The film follows the adventures of a French aristocrat, the \"Condemor\"and Lucas, his faithful Mexican servant, lost in the desert of Far West, looking for ways to return to Paris. Following an unintentional demonstration of courage, \"Condemor\" is appointed sheriff very much against his will and forced to chase the \"One- Eyed\" and solve the mystery of the whereabouts of Chico's father and also the location of the legendary El Dorado, the fabulous gold mine. The plot thickens when Condemor platonic love, the \"Bella Jolly\" saloon singer, is also kidnapped by the evil ...",
+                "release_date": "1996-06-27",
+                "genre_ids": [
+                              37,
+                              35
+                              ],
+                "id": 104638,
+                "original_title": "Aquí llega Condemor, el pecador de la pradera",
+                "original_language": "es",
+                "title": "Aquí llega Condemor, el pecador de la pradera",
+                "backdrop_path": "/c3Mj24Y29PzmWgG8L3z4vSwrU7N.jpg",
+                "popularity": 1.000245,
+                "vote_count": 0,
+                "video": false,
+                "vote_average": 0
+                }
+                ],
+    "total_results": 2,
+    "total_pages": 1
+}

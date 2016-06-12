@@ -31,7 +31,6 @@ public struct Network: Networking {
                         parameters: [String:AnyObject]?) -> Future<NSData, NetworkError> {
         
         let response = Promise<NSData, NetworkError>()
-
         Alamofire.request(Alamofire.Method.init(rawValue: method.rawValue)!, URLString, parameters: parameters)
             .response { _, _, data, error in
                 guard let data = data where error == nil else {

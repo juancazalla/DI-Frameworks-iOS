@@ -20,7 +20,8 @@
 		5950BFCA1CF60E550037A598 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59937D9D1CF605440096C908 /* Domain.framework */; };
 		59748A6F1D0C10AF00A1BE05 /* SearchMovieUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59748A6E1D0C10AF00A1BE05 /* SearchMovieUseCaseTests.swift */; };
 		59748A721D0CA64E00A1BE05 /* KIFHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59748A711D0CA64E00A1BE05 /* KIFHelper.swift */; };
-		59748A771D0CC82600A1BE05 /* MoviesRemoteDataSourceStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59748A761D0CC82600A1BE05 /* MoviesRemoteDataSourceStub.swift */; };
+		5982987A1D0DC1BB00535AB3 /* NetworkCondemorStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 598298791D0DC1BB00535AB3 /* NetworkCondemorStub.swift */; };
+		5982987D1D0DD66F00535AB3 /* Condemor.json in Resources */ = {isa = PBXBuildFile; fileRef = 5982987C1D0DD66F00535AB3 /* Condemor.json */; };
 		59937D6A1CF5FFD70096C908 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59937D691CF5FFD70096C908 /* AppDelegate.swift */; };
 		59937D711CF5FFD70096C908 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59937D701CF5FFD70096C908 /* Assets.xcassets */; };
 		59937D741CF5FFD70096C908 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59937D721CF5FFD70096C908 /* LaunchScreen.storyboard */; };
@@ -139,7 +140,8 @@
 		5593B0B46CF6B807FFD4BBF5 /* Pods-DI&Frameworks-DI&FrameworksTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DI&Frameworks-DI&FrameworksTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DI&Frameworks-DI&FrameworksTests/Pods-DI&Frameworks-DI&FrameworksTests.debug.xcconfig"; sourceTree = "<group>"; };
 		59748A6E1D0C10AF00A1BE05 /* SearchMovieUseCaseTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchMovieUseCaseTests.swift; sourceTree = "<group>"; };
 		59748A711D0CA64E00A1BE05 /* KIFHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KIFHelper.swift; sourceTree = "<group>"; };
-		59748A761D0CC82600A1BE05 /* MoviesRemoteDataSourceStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesRemoteDataSourceStub.swift; sourceTree = "<group>"; };
+		598298791D0DC1BB00535AB3 /* NetworkCondemorStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCondemorStub.swift; sourceTree = "<group>"; };
+		5982987C1D0DD66F00535AB3 /* Condemor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Condemor.json; sourceTree = "<group>"; };
 		59937D661CF5FFD70096C908 /* DI&Frameworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DI&Frameworks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		59937D691CF5FFD70096C908 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59937D701CF5FFD70096C908 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -310,9 +312,18 @@
 		59748A731D0CC4A900A1BE05 /* TestDoubles */ = {
 			isa = PBXGroup;
 			children = (
-				59748A761D0CC82600A1BE05 /* MoviesRemoteDataSourceStub.swift */,
+				5982987B1D0DD65100535AB3 /* JSON Files */,
+				598298791D0DC1BB00535AB3 /* NetworkCondemorStub.swift */,
 			);
 			name = TestDoubles;
+			sourceTree = "<group>";
+		};
+		5982987B1D0DD65100535AB3 /* JSON Files */ = {
+			isa = PBXGroup;
+			children = (
+				5982987C1D0DD66F00535AB3 /* Condemor.json */,
+			);
+			name = "JSON Files";
 			sourceTree = "<group>";
 		};
 		59937D5D1CF5FFD70096C908 = {
@@ -783,6 +794,7 @@
 			files = (
 				59937D741CF5FFD70096C908 /* LaunchScreen.storyboard in Resources */,
 				59937D711CF5FFD70096C908 /* Assets.xcassets in Resources */,
+				5982987D1D0DD66F00535AB3 /* Condemor.json in Resources */,
 				59937DD01CF607770096C908 /* MovieTableViewCell.xib in Resources */,
 				59937DCE1CF607770096C908 /* SearchViewController.xib in Resources */,
 				59937DD41CF607770096C908 /* MovieDetailsViewController.xib in Resources */,
@@ -1117,8 +1129,8 @@
 				59937DCF1CF607770096C908 /* MovieTableViewCell.swift in Sources */,
 				59937DBD1CF607060096C908 /* DependenciesContainer.swift in Sources */,
 				59937DCD1CF607770096C908 /* SearchViewController.swift in Sources */,
-				59748A771D0CC82600A1BE05 /* MoviesRemoteDataSourceStub.swift in Sources */,
 				59937DD21CF607770096C908 /* SearchMovieWireframe.swift in Sources */,
+				5982987A1D0DC1BB00535AB3 /* NetworkCondemorStub.swift in Sources */,
 				59937D6A1CF5FFD70096C908 /* AppDelegate.swift in Sources */,
 				59937DD51CF607770096C908 /* MovieDetailsViewModel.swift in Sources */,
 				59937DD71CF607770096C908 /* UITableView+ReusableView.swift in Sources */,
