@@ -9,7 +9,6 @@
 import Foundation
 import Domain
 import BrightFutures
-import Alamofire
 import SwiftyJSON
 
 public protocol MoviesRemoteDataSourceType {
@@ -25,24 +24,16 @@ public struct TMDBDataSource: MoviesRemoteDataSourceType {
     }
 
     public func getMoviesByTitle(title: String) -> Future<[Domain.Movie], GetMoviesError> {
-        let moviesPromise = Promise<[Domain.Movie], GetMoviesError>()
-
         let url = "https://api.themoviedb.org/3/search/movie"
         let parameters = ["api_key": Keys.TMDBApiKey, "query": title]
 
-        network.request(.GET, url, parameters: parameters).response {
-            _, _, data, error in
-            guard error == nil else {
-                moviesPromise.failure(.UnknownError)
-                return
-            }
-
-            let movies = data.map { TMDBDataSource.decode($0) }
-            if let movies = movies {
+        let moviesPromise = Promise<[Domain.Movie], GetMoviesError>()
+        network.request(.GET, url, parameters: parameters)
+            .onSuccess { data in
+                let movies = TMDBDataSource.decode(data)
                 moviesPromise.success(movies)
-            } else {
+            }.onFailure { _ in
                 moviesPromise.failure(.UnknownError)
-            }
         }
 
         return moviesPromise.future
