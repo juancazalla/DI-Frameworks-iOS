@@ -15,7 +15,7 @@ def dataPods
 end
 
 target 'DI&Frameworks' do
-  pod 'Swinject'
+  pod 'Dip'
   pod 'BrightFutures'
 
   domainPods
