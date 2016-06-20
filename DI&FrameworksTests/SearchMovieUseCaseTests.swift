@@ -8,7 +8,7 @@
 
 import XCTest
 import Nimble
-import Swinject
+import Dip
 import Domain
 
 @testable import DI_Frameworks
@@ -33,11 +33,11 @@ class SearchMovieUseCaseTests: XCTestCase {
 private extension SearchMovieUseCaseTests {
     func givenAnEmptySearchViewController() {
         let dependenciesContainer = DependenciesContainer.sharedInstance
-        dependenciesContainer.container.register(Networking.self) { _ in
-            NetworkStub(filename: "Condemor")
+        dependenciesContainer.container.register {
+            NetworkStub(filename: "Condemor") as Networking
         }
 
-        let searchViewController = dependenciesContainer.resolve(SearchViewController)
+        let searchViewController: SearchViewController = dependenciesContainer.resolve()
         UIApplication.sharedApplication().keyWindow?.rootViewController = UINavigationController(rootViewController: searchViewController)
     }
     

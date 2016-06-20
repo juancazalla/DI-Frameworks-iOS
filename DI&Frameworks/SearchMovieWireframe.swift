@@ -22,8 +22,8 @@ struct SearchMovieWireframe: SearchMovieWireframeType {
     }
     
     func presentMovieDetails(movie: Movie, sourceViewController: UIViewController) {
-        let viewModel = dependenciesContainer.resolve(MovieDetailsViewModelType.self, argument: movie)
-        let viewController = dependenciesContainer.resolve(MovieDetailsViewController.self, argument: viewModel)
+        let viewModel: MovieDetailsViewModelType = dependenciesContainer.resolve(withArguments: movie)
+        let viewController: MovieDetailsViewController = dependenciesContainer.resolve(withArguments: viewModel)
 
         sourceViewController.navigationController?.pushViewController(viewController, animated: true)
     }

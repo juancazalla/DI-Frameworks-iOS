@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.makeKeyAndVisible()
-        let searchViewController = dependenciesContainer.resolve(SearchViewController)
+        let searchViewController: SearchViewController = dependenciesContainer.resolve()
         let navigationController = UINavigationController(rootViewController: searchViewController)
         window?.rootViewController = navigationController
 
