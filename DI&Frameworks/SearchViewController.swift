@@ -21,18 +21,18 @@ class SearchViewController: UIViewController {
 
     fileprivate let searchBar: UISearchBar
     fileprivate var viewModel: SearchViewModelType
-    fileprivate let wireframe: SearchMovieWireframeType
+    fileprivate let navigator: MovieDetailsNavigatorType
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    init(viewModel: SearchViewModelType, wireframe: SearchMovieWireframeType) {
+    init(viewModel: SearchViewModelType, navigator: MovieDetailsNavigatorType) {
         searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
         searchBar.accessibilityLabel = "SearchBar"
         self.viewModel = viewModel
-        self.wireframe = wireframe
+        self.navigator = navigator
 
         super.init(nibName: nil, bundle: nil)
 
@@ -69,7 +69,7 @@ extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        wireframe.presentMovieDetails(viewModel.movies[indexPath.row], sourceViewController: self)
+		navigator.navigateTo(movie: viewModel.movies[indexPath.row], sourceViewController: self)
     }
 }
 

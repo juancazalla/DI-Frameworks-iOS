@@ -15,7 +15,6 @@ def dataPods
 end
 
 target 'DI&Frameworks' do
-  pod 'Dip'
   pod 'BrightFutures'
 
   domainPods
@@ -23,7 +22,7 @@ target 'DI&Frameworks' do
   
   target 'DI&FrameworksTests' do
     pod 'KIF', '~> 3.0', :configurations => ['Debug']
-    pod 'Nimble', '~> 4.0.0'
+    pod 'Nimble'
   end
 
   target 'DI&FrameworksUITests' do
