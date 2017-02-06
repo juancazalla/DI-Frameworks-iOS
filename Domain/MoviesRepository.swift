@@ -10,5 +10,5 @@ import Foundation
 import BrightFutures
 
 public protocol MoviesRepositoryType {
-    func getMoviesByTitle(title: String) -> Future<[Movie], GetMoviesError>
+    func getMoviesByTitle(_ title: String) -> Future<[Movie], GetMoviesError>
 }

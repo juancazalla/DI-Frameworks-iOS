@@ -10,18 +10,18 @@ import Foundation
 import Domain
 
 protocol SearchMovieWireframeType {
-    func presentMovieDetails(movie: Movie, sourceViewController: UIViewController)
+    func presentMovieDetails(_ movie: Movie, sourceViewController: UIViewController)
 }
 
 struct SearchMovieWireframe: SearchMovieWireframeType {
     
-    private let dependenciesContainer: DependenciesContainer
+    fileprivate let dependenciesContainer: DependenciesContainer
     
     init(dependenciesContainer: DependenciesContainer = DependenciesContainer.sharedInstance) {
         self.dependenciesContainer = dependenciesContainer
     }
     
-    func presentMovieDetails(movie: Movie, sourceViewController: UIViewController) {
+    func presentMovieDetails(_ movie: Movie, sourceViewController: UIViewController) {
         let viewModel: MovieDetailsViewModelType = dependenciesContainer.resolve(withArguments: movie)
         let viewController: MovieDetailsViewController = dependenciesContainer.resolve(withArguments: viewModel)
 

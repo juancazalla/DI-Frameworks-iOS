@@ -9,15 +9,15 @@
 import Foundation
 import BrightFutures
 
-public enum GetMoviesError: ErrorType {
-    case ConnectionError, UnknownError
+public enum GetMoviesError: Error {
+    case connectionError, unknownError
 }
 
 public protocol GetMoviesByTitleType {
-    func execute(movieTitle: String) -> Future<[Movie], GetMoviesError>
+    func execute(_ movieTitle: String) -> Future<[Movie], GetMoviesError>
 }
 
-public class GetMoviesByTitle: GetMoviesByTitleType {
+open class GetMoviesByTitle: GetMoviesByTitleType {
 
     let moviesRepository: MoviesRepositoryType
 
@@ -25,7 +25,7 @@ public class GetMoviesByTitle: GetMoviesByTitleType {
         self.moviesRepository = moviesRepository
     }
 
-    public func execute(movieTitle: String) -> Future<[Movie], GetMoviesError> {
+    open func execute(_ movieTitle: String) -> Future<[Movie], GetMoviesError> {
         return moviesRepository.getMoviesByTitle(movieTitle)
     }
 }

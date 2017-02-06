@@ -41,10 +41,10 @@ private extension SearchMovieUseCaseTests {
         UIApplication.sharedApplication().keyWindow?.rootViewController = UINavigationController(rootViewController: searchViewController)
     }
     
-    func searchMoviesWithTitle(title: String) -> [Domain.Movie] {
+    func searchMoviesWithTitle(_ title: String) -> [Domain.Movie] {
         tester().enterText(title, intoViewWithAccessibilityLabel: "SearchBar")
         
-        tester().tapViewWithAccessibilityLabel("Search")
+        tester().tapView(withAccessibilityLabel: "Search")
         
         return [Movie(title: "Brácula (Condemor II)"),
                 Movie(title: "Aquí llega Condemor, el pecador de la pradera")]

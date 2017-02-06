@@ -10,30 +10,30 @@ import Foundation
 import Domain
 
 public protocol MoviesCacheDataSourceType {
-    func setMovies(movies: [Domain.Movie], title: String)
+    func setMovies(_ movies: [Domain.Movie], title: String)
     
-    func containsMoviesWithTitle(title: String) -> Bool
+    func containsMoviesWithTitle(_ title: String) -> Bool
     
-    func getMoviesByTitle(title: String) -> [Domain.Movie]
+    func getMoviesByTitle(_ title: String) -> [Domain.Movie]
 }
 
-public class MoviesCacheDataSource: MoviesCacheDataSourceType {
+open class MoviesCacheDataSource: MoviesCacheDataSourceType {
 
-    private var moviesMemoryCache: [String : [Domain.Movie]] = [ : ]
+    fileprivate var moviesMemoryCache: [String : [Domain.Movie]] = [ : ]
 
     public init() {
 
     }
 
-    public func setMovies(movies: [Domain.Movie], title: String) {
+    open func setMovies(_ movies: [Domain.Movie], title: String) {
         moviesMemoryCache[title] = movies
     }
 
-    public func containsMoviesWithTitle(title: String) -> Bool {
+    open func containsMoviesWithTitle(_ title: String) -> Bool {
         return moviesMemoryCache[title] != nil
     }
 
-    public func getMoviesByTitle(title: String) -> [Domain.Movie] {
+    open func getMoviesByTitle(_ title: String) -> [Domain.Movie] {
         guard let movies = moviesMemoryCache[title] else {
             return []
         }

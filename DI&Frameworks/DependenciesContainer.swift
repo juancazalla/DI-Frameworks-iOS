@@ -54,17 +54,17 @@ struct DependenciesContainer {
 }
 
 extension DependenciesContainer {
-    func resolve<T>(tag tag: DependencyTagConvertible? = nil) -> T {
+    func resolve<T>(tag: DependencyTagConvertible? = nil) -> T {
         guard let resolvedInstance = try? container.resolve() as T else {
-            fatalError("Can not resolve: \(String(T.self))")
+            fatalError("Can not resolve: \(String(describing: T.self))")
         }
         
         return resolvedInstance
     }
     
     func resolve<T, A>(withArguments arg1: A) -> T {
-        guard let resolvedInstance = try? (container.resolve(A) as! T) else {
-            fatalError("Can not resolve: \(String(T.self))")
+        guard let resolvedInstance = try? (container.resolve(A.self) as! T) else {
+            fatalError("Can not resolve: \(String(describing: T.self))")
         }
         
         return resolvedInstance

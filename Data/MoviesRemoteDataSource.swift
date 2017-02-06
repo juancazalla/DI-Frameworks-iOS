@@ -12,18 +12,18 @@ import BrightFutures
 import SwiftyJSON
 
 public protocol MoviesRemoteDataSourceType {
-    func getMoviesByTitle(title: String) -> Future<[Domain.Movie], GetMoviesError>
+    func getMoviesByTitle(_ title: String) -> Future<[Domain.Movie], GetMoviesError>
 }
 
 public struct TMDBDataSource: MoviesRemoteDataSourceType {
 
-    private let network: Networking
+    fileprivate let network: Networking
 
     public init(network: Networking) {
         self.network = network
     }
 
-    public func getMoviesByTitle(title: String) -> Future<[Domain.Movie], GetMoviesError> {
+    public func getMoviesByTitle(_ title: String) -> Future<[Domain.Movie], GetMoviesError> {
         let url = "https://api.themoviedb.org/3/search/movie"
         let parameters = ["api_key": Keys.TMDBApiKey, "query": title]
 
@@ -33,13 +33,13 @@ public struct TMDBDataSource: MoviesRemoteDataSourceType {
                 let movies = TMDBDataSource.decode(data)
                 moviesPromise.success(movies)
             }.onFailure { _ in
-                moviesPromise.failure(.UnknownError)
+                moviesPromise.failure(.unknownError)
         }
 
         return moviesPromise.future
     }
 
-    private static func decode(data: NSData) -> [Domain.Movie] {
+    fileprivate static func decode(_ data: Data) -> [Domain.Movie] {
         let json = JSON(data: data)
         var movies: [Domain.Movie] = []
         for (_, j) in json["results"] {
