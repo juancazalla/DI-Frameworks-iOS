@@ -11,15 +11,15 @@ import Domain
 import BrightFutures
 
 public struct MoviesRepository: Domain.MoviesRepositoryType {
-    private let remoteDataSource: MoviesRemoteDataSourceType
-    private let cacheDataSource: MoviesCacheDataSourceType
+    fileprivate let remoteDataSource: MoviesRemoteDataSourceType
+    fileprivate let cacheDataSource: MoviesCacheDataSourceType
 
     public init(remoteDataSource: MoviesRemoteDataSourceType, cacheDataSource: MoviesCacheDataSourceType) {
         self.remoteDataSource = remoteDataSource
         self.cacheDataSource = cacheDataSource
     }
 
-    public func getMoviesByTitle(title: String) -> Future<[Domain.Movie], GetMoviesError> {
+    public func getMoviesByTitle(_ title: String) -> Future<[Domain.Movie], GetMoviesError> {
         guard !cacheDataSource.containsMoviesWithTitle(title) else {
             let promise = Promise<[Domain.Movie], GetMoviesError>()
             promise.success(cacheDataSource.getMoviesByTitle(title))

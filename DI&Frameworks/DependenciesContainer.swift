@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Swinject
+import Dip
 import Domain
 import Data
 
@@ -15,54 +15,58 @@ struct DependenciesContainer {
 
     static let sharedInstance = DependenciesContainer()
 
-    var container: Container = Container()
+    var container: DependencyContainer = DependencyContainer()
 
     func registerDependencies() {
-        container.register(GetMoviesByTitleType.self) { _ in
-            GetMoviesByTitle(moviesRepository: self.resolve(MoviesRepositoryType))
+        container.register {
+            GetMoviesByTitle(moviesRepository: self.resolve()) as GetMoviesByTitleType
         }
-        container.register(SearchViewModelType.self) { _ in
-            SearchViewModel(getMoviesByTitle: self.resolve(GetMoviesByTitleType))
+        container.register {
+            SearchViewModel(getMoviesByTitle: self.resolve()) as SearchViewModelType
         }
-        container.register(SearchViewController.self) { _ in
-            SearchViewController(viewModel: self.resolve(SearchViewModelType),
-                                 wireframe: self.resolve(SearchMovieWireframeType))
+        container.register {
+            SearchViewController(viewModel: self.resolve(),
+                                 wireframe: self.resolve())
         }
-        container.register(SearchMovieWireframeType.self) { _ in
-            SearchMovieWireframe()
+        container.register() {
+            SearchMovieWireframe() as SearchMovieWireframeType
         }
-        container.register(MovieDetailsViewController.self) { _, viewModel in
+        container.register() { viewModel in
             MovieDetailsViewController(viewModel: viewModel)
         }
-        container.register(MovieDetailsViewModelType.self) { _, movie in
-            MovieDetailsViewModel(movie: movie)
+        container.register() { movie in
+            MovieDetailsViewModel(movie: movie) as MovieDetailsViewModelType
         }
-        container.register(MoviesRepositoryType.self) { _ in
-            MoviesRepository(remoteDataSource: self.resolve(MoviesRemoteDataSourceType),
-                             cacheDataSource: self.resolve(MoviesCacheDataSourceType))
+        container.register() {
+            MoviesRepository(remoteDataSource: self.resolve(),
+                             cacheDataSource: self.resolve()) as MoviesRepositoryType
         }
-        container.register(MoviesRemoteDataSourceType.self) { _ in
-            TMDBDataSource(network: self.resolve(Networking))
+        container.register {
+            TMDBDataSource(network: self.resolve()) as MoviesRemoteDataSourceType
         }
-        container.register(MoviesCacheDataSourceType.self) { _ in
-            MoviesCacheDataSource()
+        container.register {
+            MoviesCacheDataSource() as MoviesCacheDataSourceType
         }
-        container.register(Networking.self) { _ in
-            Network()
+        container.register {
+            Network() as Networking
         }
     }
+}
 
-    func resolve<Service> (serviceType: Service.Type) -> Service {
-        guard let service = container.resolve(serviceType) else {
-            fatalError("Can not resolve: \(String(Service))")
+extension DependenciesContainer {
+    func resolve<T>(tag: DependencyTagConvertible? = nil) -> T {
+        guard let resolvedInstance = try? container.resolve() as T else {
+            fatalError("Can not resolve: \(String(describing: T.self))")
         }
-        return service
+        
+        return resolvedInstance
     }
     
-    func resolve<Service, Arg1>(serviceType: Service.Type, argument: Arg1) -> Service {
-        guard let service = container.resolve(serviceType, argument: argument) else {
-            fatalError("Can not resolve: \(String(Service))")
+    func resolve<T, A>(withArguments arg1: A) -> T {
+        guard let resolvedInstance = try? (container.resolve(A.self) as! T) else {
+            fatalError("Can not resolve: \(String(describing: T.self))")
         }
-        return service
+        
+        return resolvedInstance
     }
 }

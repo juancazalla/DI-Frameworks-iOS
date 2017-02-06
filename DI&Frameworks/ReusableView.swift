@@ -18,12 +18,12 @@ protocol NibLoadableView: class {
 
 extension ReusableView where Self: UIView {
     static var defaultReuseIdentifier: String {
-        return String(Self)
+        return String(describing: Self.self)
     }
 }
 
 extension NibLoadableView where Self: UIView {
     static var nibName: String {
-        return String(Self)
+        return String(describing: Self.self)
     }
 }

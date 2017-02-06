@@ -1,6 +1,0 @@
-framework module Pods_DI_Frameworks_DI_FrameworksUITests {
-  umbrella header "Pods-DI&Frameworks-DI&FrameworksUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

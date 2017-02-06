@@ -14,13 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var dependenciesContainer: DependenciesContainer!
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.dependenciesContainer = DependenciesContainer.sharedInstance
         dependenciesContainer.registerDependencies()
 
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let searchViewController = dependenciesContainer.resolve(SearchViewController)
+        let searchViewController: SearchViewController = dependenciesContainer.resolve()
         let navigationController = UINavigationController(rootViewController: searchViewController)
         window?.rootViewController = navigationController
 

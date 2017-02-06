@@ -14,14 +14,14 @@ class SearchViewController: UIViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-            tableView.register(MovieTableViewCell)
+            tableView.register(MovieTableViewCell.self)
             tableView.tableFooterView = UIView(frame: CGRect.zero)
         }
     }
 
-    private let searchBar: UISearchBar
-    private var viewModel: SearchViewModelType
-    private let wireframe: SearchMovieWireframeType
+    fileprivate let searchBar: UISearchBar
+    fileprivate var viewModel: SearchViewModelType
+    fileprivate let wireframe: SearchMovieWireframeType
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -29,7 +29,7 @@ class SearchViewController: UIViewController {
 
     init(viewModel: SearchViewModelType, wireframe: SearchMovieWireframeType) {
         searchBar = UISearchBar()
-        searchBar.searchBarStyle = .Minimal
+        searchBar.searchBarStyle = .minimal
         searchBar.accessibilityLabel = "SearchBar"
         self.viewModel = viewModel
         self.wireframe = wireframe
@@ -54,31 +54,31 @@ extension SearchViewController: SearchViewModelDelegate {
 }
 
 extension SearchViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.movies.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: MovieTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.configureWithMovie(viewModel.movies[indexPath.row])
+        let _ = cell.configureWithMovie(viewModel.movies[indexPath.row])
         return cell
     }
 }
 
 extension SearchViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
         wireframe.presentMovieDetails(viewModel.movies[indexPath.row], sourceViewController: self)
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchText = searchText
     }
 
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         viewModel.search()
     }

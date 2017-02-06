@@ -8,7 +8,7 @@
 
 import XCTest
 import Nimble
-import Swinject
+import Dip
 import Domain
 
 @testable import DI_Frameworks
@@ -33,18 +33,18 @@ class SearchMovieUseCaseTests: XCTestCase {
 private extension SearchMovieUseCaseTests {
     func givenAnEmptySearchViewController() {
         let dependenciesContainer = DependenciesContainer.sharedInstance
-        dependenciesContainer.container.register(Networking.self) { _ in
-            NetworkStub(filename: "Condemor")
+        dependenciesContainer.container.register {
+            NetworkStub(filename: "Condemor") as Networking
         }
 
-        let searchViewController = dependenciesContainer.resolve(SearchViewController)
+        let searchViewController: SearchViewController = dependenciesContainer.resolve()
         UIApplication.sharedApplication().keyWindow?.rootViewController = UINavigationController(rootViewController: searchViewController)
     }
     
-    func searchMoviesWithTitle(title: String) -> [Domain.Movie] {
+    func searchMoviesWithTitle(_ title: String) -> [Domain.Movie] {
         tester().enterText(title, intoViewWithAccessibilityLabel: "SearchBar")
         
-        tester().tapViewWithAccessibilityLabel("Search")
+        tester().tapView(withAccessibilityLabel: "Search")
         
         return [Movie(title: "Brácula (Condemor II)"),
                 Movie(title: "Aquí llega Condemor, el pecador de la pradera")]

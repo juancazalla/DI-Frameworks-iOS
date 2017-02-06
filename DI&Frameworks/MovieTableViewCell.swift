@@ -13,7 +13,7 @@ class MovieTableViewCell: UITableViewCell, ReusableView, NibLoadableView {
 
     @IBOutlet weak var titleLabel: UILabel!
 
-    func configureWithMovie(movie: Movie) -> MovieTableViewCell {
+    func configureWithMovie(_ movie: Movie) -> MovieTableViewCell {
         titleLabel.text = movie.title
 
         return self
