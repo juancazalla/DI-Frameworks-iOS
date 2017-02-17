@@ -12,17 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var dependenciesContainer: DependenciesContainer!
+    let assembler: Assembler = AppAssembler()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        self.dependenciesContainer = DependenciesContainer.sharedInstance
-        dependenciesContainer.registerDependencies()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        let searchViewController: SearchViewController = dependenciesContainer.resolve()
-        let navigationController = UINavigationController(rootViewController: searchViewController)
-        window?.rootViewController = navigationController
+		let searchMoviesNavigator = SearchMoviesNavigator(assembler: assembler)
+		searchMoviesNavigator.navigateToSearchMovies(window: window)
 
         return true
     }

@@ -8,7 +8,6 @@
 
 import XCTest
 import Nimble
-import Dip
 import Domain
 
 @testable import DI_Frameworks
@@ -22,7 +21,7 @@ class SearchMovieUseCaseTests: XCTestCase {
         let movies = searchMoviesWithTitle("Condemor")
 
         for movie in movies {
-            let movieCell = tester().waitForViewWithAccessibilityLabel(movie.title)
+            let movieCell = tester().waitForView(withAccessibilityLabel: movie.title)
                 as! MovieTableViewCell
 
             expect(movieCell.titleLabel.text).to(equal(movie.title))
@@ -32,13 +31,9 @@ class SearchMovieUseCaseTests: XCTestCase {
 
 private extension SearchMovieUseCaseTests {
     func givenAnEmptySearchViewController() {
-        let dependenciesContainer = DependenciesContainer.sharedInstance
-        dependenciesContainer.container.register {
-            NetworkStub(filename: "Condemor") as Networking
-        }
+		let searchMoviesNavigator = SearchMoviesNavigator(assembler: TestAssembler())
 
-        let searchViewController: SearchViewController = dependenciesContainer.resolve()
-        UIApplication.sharedApplication().keyWindow?.rootViewController = UINavigationController(rootViewController: searchViewController)
+		searchMoviesNavigator.navigateToSearchMovies(window: UIApplication.shared.keyWindow)
     }
     
     func searchMoviesWithTitle(_ title: String) -> [Domain.Movie] {
@@ -49,4 +44,12 @@ private extension SearchMovieUseCaseTests {
         return [Movie(title: "Brácula (Condemor II)"),
                 Movie(title: "Aquí llega Condemor, el pecador de la pradera")]
     }
+}
+
+class TestAssembler: Assembler { }
+
+extension SearchMoviesAssembler where Self: TestAssembler {
+	func resolve() -> Networking {
+		return NetworkStub(filename: "Condemor")
+	}
 }
