@@ -4,8 +4,6 @@ Simple iOS app written in Swift using dependency injection and frameworks
 Developed By
 ------------
 
-![image](https://cdn-images-1.medium.com/fit/c/100/100/0*ak3AscEP65_BYVBK.jpeg
-)
 * Juan Cazalla Estrella - <juan.cazalla.17@gmail.com>
 
 License
