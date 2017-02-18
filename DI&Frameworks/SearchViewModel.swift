@@ -25,7 +25,7 @@ protocol SearchViewModelDelegate {
 
 class SearchViewModel: SearchViewModelType {
     let getMoviesByTitle: GetMoviesByTitleType
-    var delegate: SearchViewModelDelegate?
+    weak var delegate: SearchViewModelDelegate?
     var movies: [Movie] = [] {
         didSet {
             delegate?.moviesDidUpdate()
