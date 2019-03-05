@@ -68,8 +68,7 @@ extension SearchViewController: UITableViewDataSource {
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-		navigator.navigateTo(movie: viewModel.movies[indexPath.row], sourceViewController: self)
+	navigator.navigateTo(movie: viewModel.movies[indexPath.row], sourceViewController: self)
     }
 }
 
